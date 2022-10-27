@@ -1,0 +1,19 @@
+{
+  "name": "python-nep17",
+  "version": "0.0.1",
+  "description": "nep17 example",
+  "main": "index.js",
+  "author": "sam",
+  "license": "MIT",
+  "scripts": {
+    "deploy": "node scripts/deploy.js"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.3",
+    "prettier": "^2.7.1"
+  },
+  "dependencies": {
+    "@cityofzion/neon-js": "^5.2.0",
+    "@cityofzion/props": "^0.1.9"
+  }
+}
