@@ -8,21 +8,21 @@
                 "offset": 0,
                 "parameters": [],
                 "returntype": "String",
-                "safe": false
+                "safe": true
             },
             {
                 "name": "decimals",
                 "offset": 2,
                 "parameters": [],
                 "returntype": "Integer",
-                "safe": false
+                "safe": true
             },
             {
                 "name": "totalSupply",
                 "offset": 4,
                 "parameters": [],
                 "returntype": "Integer",
-                "safe": false
+                "safe": true
             },
             {
                 "name": "balanceOf",
@@ -34,11 +34,11 @@
                     }
                 ],
                 "returntype": "Integer",
-                "safe": false
+                "safe": true
             },
             {
                 "name": "transfer",
-                "offset": 62,
+                "offset": 85,
                 "parameters": [
                     {
                         "name": "from_address",
@@ -61,8 +61,15 @@
                 "safe": false
             },
             {
+                "name": "verify",
+                "offset": 516,
+                "parameters": [],
+                "returntype": "Boolean",
+                "safe": false
+            },
+            {
                 "name": "_deploy",
-                "offset": 323,
+                "offset": 614,
                 "parameters": [
                     {
                         "name": "data",
@@ -78,7 +85,7 @@
             },
             {
                 "name": "onNEP17Payment",
-                "offset": 318,
+                "offset": 523,
                 "parameters": [
                     {
                         "name": "from_address",
@@ -98,7 +105,7 @@
             },
             {
                 "name": "_initialize",
-                "offset": 402,
+                "offset": 693,
                 "parameters": [],
                 "returntype": "Void",
                 "safe": false
@@ -127,16 +134,19 @@
     "permissions": [
         {
             "contract": "*",
-            "methods": "*"
+            "methods": [
+                "onNEP17Payment"
+            ]
         }
     ],
     "trusts": [],
     "features": {},
-    "supportedstandards": [],
+    "supportedstandards": [
+        "NEP-17"
+    ],
     "extra": {
-        "Date of Creation": "10/2/2022",
         "Author": "Secret",
-        "Email": "404@neo.org",
-        "Description": "practice"
+        "Description": "practice",
+        "Email": "404@neo.org"
     }
 }

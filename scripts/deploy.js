@@ -8,7 +8,7 @@ const basePath = process.argv[2] || "contracts"
 const NODE = process.argv[3] || "https://testnet1.neo.coz.io:443/"
 const PRIVATE_KEY = process.argv[4] || process.env.PRIVATE_KEY
 const SIGNER = new Neon.wallet.Account(PRIVATE_KEY)
-const TIME_CONSTANT = process.argv[5] || 5000
+const TIME_CONSTANT = process.argv[5] || 16000
 
 async function NEFHunter(dirPath) {
     const files = fs.readdirSync(dirPath)
@@ -43,8 +43,3 @@ async function synchronousDeploy(node, pathToNEF, signer, timeConstant) {
 }
 
 NEFHunter(basePath)
-// .then(() => process.exit(0))
-// .catch((error) => {
-//     console.log(error)
-//     process.exit(1)
-// })
