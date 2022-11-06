@@ -3,12 +3,25 @@ const { helpers } = require("@cityofzion/props")
 const fs = require("fs")
 require("dotenv").config()
 
-// const NETWORK =
-const basePath = process.argv[2] || "contracts"
-const NODE = process.argv[3] || "https://testnet1.neo.coz.io:443/"
-const PRIVATE_KEY = process.argv[4] || process.env.PRIVATE_KEY
-const SIGNER = new Neon.wallet.Account(PRIVATE_KEY)
-const TIME_CONSTANT = process.argv[5] || 16000
+var network, node, privateKey, signer, timeConstant
+network = process.argv[2]
+
+if (network.toLowerCase() == "testnet") {
+    node = "https://testnet1.neo.coz.io:443/"
+    privateKey = process.env.PRIVATE_KEY
+    signer = new Neon.wallet.Account(privateKey)
+    timeConstant = 16000
+} else if (network.toLowerCase() == "localhost") {
+    network = JSON.parse(fs.readFileSync("default.neo-express").toString())
+    privateKey = network.wallets[0].accounts[0]["private-key"]
+    node = "http://localhost:50012"
+    signer = new Neon.wallet.Account(privateKey)
+    timeConstant = 16000
+} else {
+    console.log("network not detected!")
+    process.exit(0)
+}
+const basePath = "contracts"
 
 async function NEFHunter(dirPath) {
     const files = fs.readdirSync(dirPath)
@@ -17,16 +30,8 @@ async function NEFHunter(dirPath) {
         if (fs.statSync(dirPath + "/" + file).isDirectory()) {
             NEFHunter(dirPath + "/" + file)
         } else {
-            const name = file.split(".").pop()
             if (file.split(".").pop() == "nef") {
-                synchronousDeploy(NODE, dirPath + "/" + file, SIGNER, TIME_CONSTANT)
-                // .then(() => process.exit(0))
-                // .catch((erorr) => {
-                //     console.log(erorr)
-                //     process.exit(1)
-                // })
-            } else {
-                console.log("nef file not found")
+                synchronousDeploy(node, dirPath + "/" + file, signer, timeConstant)
             }
         }
     })
