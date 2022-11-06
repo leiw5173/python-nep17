@@ -1,23 +1,41 @@
-const { wallet, CONST, sc } = require("@cityofzion/neon-js")
-const { api, helpers } = require("@cityofzion/props")
+const { wallet, sc, CONST } = require("@cityofzion/neon-js")
+const { helpers } = require("@cityofzion/props")
+const fs = require("fs")
 require("dotenv").config()
 
-const url = "http://seed2t5.neo.org:20332/"
-const contractScript = "0x5fdb2552f6512f6ed60b6dc34c3c7fc5d756bef7"
-const toAddress = "NQ8uxEgW8S8AEMKSXXXVDoEHEX9a1xiowA"
-const PRIVATE_KEY = process.env.PRIVATE_KEY
-const signer = new wallet.Account(PRIVATE_KEY)
+var network, url, privateKey, signer, contractScript, networkMagic, toAddress
+network = process.argv[2]
+
+if (network.toLowerCase() == "testnet") {
+    url = "https://testnet1.neo.coz.io:443/"
+    privateKey = process.env.PRIVATE_KEY
+    signer = new wallet.Account(privateKey)
+    contractScript = "0xe2e2ce992f4811025e0a2cc9cca3c854691f9bed"
+    networkMagic = 894710606
+    toAddress = "NR8isKNEYB92CxmxzD6GEH3ZgkCnKpY7fg"
+} else if (network.toLowerCase() == "localhost") {
+    network = JSON.parse(fs.readFileSync("default.neo-express").toString())
+    privateKey = network.wallets[0].accounts[0]["private-key"]
+    url = "http://localhost:50012"
+    signer = new wallet.Account(privateKey)
+    contractScript = "0x1488ce22ded38a0b3a2df68f6ea786589a687c71"
+    networkMagic = network["magic"]
+    toAddress = "NRbPohE8irGEPnB8J9AgyPyZPCSCYUSRmv"
+} else {
+    console.log("network not detected!")
+    process.exit(0)
+}
+
 const amount = 10000
 const timeConstant = 16000
 const params = [
     sc.ContractParam.hash160(signer.address),
     sc.ContractParam.hash160(toAddress),
     amount,
-    // [],
+    [],
 ]
 
 async function transfer(url, contractScript, signer, params) {
-    const networkMagic = CONST.MAGIC_NUMBER.TestNet
     console.log("Transfering...")
     const txid = await helpers.variableInvoke(
         url,
@@ -34,6 +52,6 @@ async function transfer(url, contractScript, signer, params) {
 transfer(url, contractScript, signer, params)
     .then(() => process.exit(0))
     .catch((e) => {
-        process.exit(1)
         console.log(e)
+        process.exit(1)
     })

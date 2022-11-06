@@ -6,8 +6,8 @@
     "author": "sam",
     "license": "MIT",
     "scripts": {
-        "deploy": "node scripts/deploy.js",
-        "transfer": "node scripts/transfer.js",
+        "deploy": "node scripts/deploy.js localhost",
+        "transfer": "node scripts/transfer.js localhost",
         "balanceOf": "node scripts/balanceOf.js"
     },
     "devDependencies": {

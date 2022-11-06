@@ -13,7 +13,7 @@ from boa3.builtin.nativecontract.contractmanagement import ContractManagement
 # --------------------------
 
 # Script hash of the contract owner
-OWNER = UInt160("NSKKL5EAftBwjnPTMZAvqWrMY6WjsCrTMo".to_script_hash())
+OWNER = UInt160("NXi7noenBkiqJu4zjckontBPyM4btJ275U".to_script_hash())
 
 # Symbol of the Token
 TOKEN_SYMBOL = "TEST"

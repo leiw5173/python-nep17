@@ -1,0 +1,3 @@
+-   Contract address
+    -   localhost: `0x1488ce22ded38a0b3a2df68f6ea786589a687c71`
+    -   testnet: `0xe2e2ce992f4811025e0a2cc9cca3c854691f9bed`
