@@ -11,7 +11,7 @@ if (network.toLowerCase() == "testnet") {
     privateKey = process.env.PRIVATE_KEY
     signer = new wallet.Account(privateKey)
     contractScript = "0xe2e2ce992f4811025e0a2cc9cca3c854691f9bed"
-    networkMagic = 894710606
+    networkMagic = CONST.MAGIC_NUMBER.TestNet
     toAddress = "NR8isKNEYB92CxmxzD6GEH3ZgkCnKpY7fg"
 } else if (network.toLowerCase() == "localhost") {
     network = JSON.parse(fs.readFileSync("default.neo-express").toString())
