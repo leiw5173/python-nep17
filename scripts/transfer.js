@@ -10,9 +10,9 @@ if (network.toLowerCase() == "testnet") {
     url = "https://testnet1.neo.coz.io:443/"
     privateKey = process.env.PRIVATE_KEY
     signer = new wallet.Account(privateKey)
-    contractScript = "0xe2e2ce992f4811025e0a2cc9cca3c854691f9bed"
-    networkMagic = CONST.MAGIC_NUMBER.TestNet
-    toAddress = "NR8isKNEYB92CxmxzD6GEH3ZgkCnKpY7fg"
+    contractScript = "0x1488ce22ded38a0b3a2df68f6ea786589a687c71"
+    networkMagic = 894710606
+    toAddress = "NSKKL5EAftBwjnPTMZAvqWrMY6WjsCrTMo"
 } else if (network.toLowerCase() == "localhost") {
     network = JSON.parse(fs.readFileSync("default.neo-express").toString())
     privateKey = network.wallets[0].accounts[0]["private-key"]
@@ -26,13 +26,13 @@ if (network.toLowerCase() == "testnet") {
     process.exit(0)
 }
 
-const amount = 10000
+const amount = 1000000000
 const timeConstant = 16000
 const params = [
-    sc.ContractParam.hash160(signer.address),
-    sc.ContractParam.hash160(toAddress),
-    amount,
-    [],
+    { type: 20, value: sc.ContractParam.hash160(signer.address).value.toString() },
+    { type: 20, value: sc.ContractParam.hash160(toAddress).value.toString() },
+    sc.ContractParam.integer(amount),
+    sc.ContractParam.array(),
 ]
 
 async function transfer(url, contractScript, signer, params) {
