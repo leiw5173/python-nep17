@@ -8,15 +8,17 @@
     "scripts": {
         "deploy": "node scripts/deploy.js localhost",
         "transfer": "node scripts/transfer.js localhost",
-        "balanceOf": "node scripts/balanceOf.js"
+        "balanceOf": "node scripts/balanceOf.js",
+        "test": "yarn mocha test/unit/nep17.test.js"
     },
     "devDependencies": {
         "assert": "^2.0.0",
         "dotenv": "^16.0.3",
+        "mocha": "^10.1.0",
         "prettier": "^2.7.1"
     },
     "dependencies": {
-        "@cityofzion/neon-js": "^5.2.0",
+        "@cityofzion/neon-js": "^5.2.2",
         "@cityofzion/props": "^0.1.9"
     }
 }
