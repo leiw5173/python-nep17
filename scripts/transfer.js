@@ -29,8 +29,8 @@ if (network.toLowerCase() == "testnet") {
 const amount = 1000000000
 const timeConstant = 16000
 const params = [
-    { type: 20, value: sc.ContractParam.hash160(signer.address).value.toString() },
-    { type: 20, value: sc.ContractParam.hash160(toAddress).value.toString() },
+    sc.ContractParam.hash160(signer.address),
+    sc.ContractParam.hash160(toAddress),
     sc.ContractParam.integer(amount),
     sc.ContractParam.array(),
 ]
