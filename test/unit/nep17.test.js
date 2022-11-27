@@ -20,14 +20,13 @@ describe("NEP17 Token Test", function () {
 
     describe("Get right initial set up", function () {
         it("the symbol should be TEST", async function () {
-            const txid = await sdk.helpers.variableInvoke(
+            const res = await sdk.helpers.variableInvoke(
                 URL,
                 networkMagic,
                 CONTRACT_HASH,
                 "symbol",
                 []
             )
-            const res = await sdk.helpers.txDidComplete(URL, txid, true)
             assert(Neon.u.base642utf8(res[0].value) == "TEST", "Symbol return wrong")
         })
     })
