@@ -97,8 +97,13 @@ describe("NEP17 Token Test", function () {
             )
             assert.equal(
                 toAddressBalanceAfter[0].value - toAddressBalanceBefore[0].value,
-                fromAddressBalanceBefore[0].value - fromAddressBalanceAfter[0].value,
-                "transfer function wrong"
+                AMOUNT,
+                "to address did not receive the token"
+            )
+            assert.equal(
+                fromAddressBalanceBefore[0].value - toAddressBalanceAfter[0].value,
+                AMOUNT,
+                "from address did not send the token"
             )
         })
     })
